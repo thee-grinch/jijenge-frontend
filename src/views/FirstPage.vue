@@ -7,8 +7,8 @@
 </template>
 <script>
 // import NavBar  from './NavBar.vue';
-import HeroSection  from './HeroSection.vue';
-import  ContributorsList from './Contributions.vue'
+import HeroSection  from '@/components/HeroSection.vue';
+import  ContributorsList from '@/components/Contributions.vue'
 export default {
         name: 'FirstPage',
         components: {
