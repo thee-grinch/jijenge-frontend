@@ -2,7 +2,31 @@
     <div class="min-h-screen flex flex-col items-center justify-center">
       <h1 class="text-2xl font-bold text-center text-green-700"> Create An Account</h1>
       <p class="text-slate-400"> Open an account and start advancing with Us</p>
-      <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+      <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-2 overflow-x-hidden overflow-y-scroll">
+        <div class="mb-4">
+          <label class="block text-gray-700 text-sm font-bold mb-2" for="first_name">
+            First Name
+          </label>
+          <input
+            v-model="first_name"
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="first_name"
+            type="text"
+            placeholder="Enter your first Name"
+          />
+          </div>
+          <div class="mb-4">
+          <label class="block text-gray-700 text-sm font-bold mb-2" for="last_name">
+            Last Name
+          </label>
+          <input
+            v-model="last_name"
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="last_name"
+            type="text"
+            placeholder="Enter Your last name"
+          />
+          </div>
         <div class="mb-4">
           <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
             Username
@@ -58,6 +82,8 @@
       return {
         url: 'http://localhost:8000/new',
         username: '',
+        first_name: '',
+        last_name: '',
         email: '',
         password: '',
       };
@@ -74,8 +100,9 @@
           body: JSON.stringify({
             'name': this.username,
             'password': this.password,
-            'first_name': "mordecai",
-            'last_name': "muvandi"
+            'first_name': this.first_name,
+            'last_name': this.last_name,
+            'email': this.email
           }),
 
         });

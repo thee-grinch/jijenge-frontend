@@ -1,7 +1,7 @@
 <!-- MainPage.vue -->
 /* eslint-disable */
 <template>
-  <div class="min-height-screen">
+  <div class="max-height-screen">
     <!-- Include NavBar component -->
     <!-- <NavBar /> -->
 
