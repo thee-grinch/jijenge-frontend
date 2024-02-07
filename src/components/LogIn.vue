@@ -50,13 +50,35 @@
   export default {
     data() {
       return {
+        url: 'http://localhost:8000/login',
         username: '',
         password: '',
       };
     },
     methods: {
-      login() {
+      async login() {
         // Add your login logic here
+        const formData = new FormData();
+        formData.append('username', this.username)
+        formData.append('password', this.password)
+        await fetch(this.url, {
+          method: 'post',
+          body: formData
+        })
+        .then(response =>{
+          if (!response.ok){
+          const errorData = response.json()
+          console.log(errorData)
+          // throw new Error('Network Response was not Ok');
+          }
+          return response.json();
+        })
+        .then(data => {
+          console.log(data)
+        })
+        .catch(error => {
+          console.error(error)
+        })
         console.log('Logging in with:', this.username, this.password);
       },
     },
