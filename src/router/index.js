@@ -8,6 +8,11 @@ const routes = [
     component: FirstPage
   },
   {
+    path: '/dashboard',
+    name: 'dashboard',
+    component: () => import('../views/DashBoard.vue')
+  },
+  {
     path: '/login',
     name: 'login',
     component: () => import('../views/LoginPage.vue')

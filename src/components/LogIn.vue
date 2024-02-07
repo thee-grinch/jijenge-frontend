@@ -74,7 +74,9 @@
           return response.json();
         })
         .then(data => {
-          console.log(data)
+          this.$router.push('/dashboard')
+          localStorage.setItem('access_token', data['access_token'])    
+          console.log(data['access_token'])
         })
         .catch(error => {
           console.error(error)

@@ -61,8 +61,8 @@
   </template>
   
   <script>
-  import MyCard from './MyCard.vue';
-  import MyChart from './MyChart.vue'
+  import MyCard from '@/components/MyCard.vue';
+  import MyChart from '@/components/MyChart.vue'
   export default {
     name: 'DashBoard',
     components: { MyCard, MyChart }
