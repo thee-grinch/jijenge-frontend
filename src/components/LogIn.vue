@@ -50,7 +50,7 @@
   export default {
     data() {
       return {
-        url: 'http://localhost:8000/login',
+        url: 'http://jijenge.muvandii.tech/app/login',
         username: '',
         password: '',
       };
@@ -74,6 +74,7 @@
           return response.json();
         })
         .then(data => {
+          this.$router.push('/dashboard');
           console.log(data)
         })
         .catch(error => {
