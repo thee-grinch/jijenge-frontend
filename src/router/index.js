@@ -1,16 +1,28 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import FirstPage from '../views/FirstPage.vue'
+import LandingPage from '../views/LandingPage.vue'
 
 const routes = [
   {
     path: '/',
     name: 'home',
-    component: FirstPage
+    component: LandingPage
   },
   {
     path: '/dashboard',
     name: 'dashboard',
-    component: () => import('../views/DashBoard.vue')
+    component: () => import('../views/DashBoard.vue'),
+    children: [
+      {
+        path: '/dashboard/loans',
+        name: 'loans',
+        component: () => import('../views/DloanView.vue')
+      },
+      {
+        path: '/dashboard/',
+        name: 'dhome',
+        component: () => import('../views/DhomeView.vue')
+      }
+    ]
   },
   {
     path: '/login',

@@ -1,18 +1,18 @@
 <template>
   <div class="bg-green-950 h-screen sm:h-fit">
-        <!-- <NavBar /> -->
+        <NavBar />
         <HeroSection />
         <ContributorsList />
   </div>
 </template>
 <script>
-// import NavBar  from './NavBar.vue';
+import NavBar  from './NavBar.vue';
 import HeroSection  from './HeroSection.vue';
 import  ContributorsList from './Contributions.vue'
 export default {
         name: 'FirstPage',
         components: {
-                // NavBar,
+                NavBar,
                 HeroSection,
                 ContributorsList
         }
