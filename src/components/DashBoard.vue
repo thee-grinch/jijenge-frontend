@@ -22,7 +22,8 @@
         <a href="#">Notifications</a>
         <a href="#">Planing</a>
         <router-link to="/dashboard/loans">My LOans</router-link>
-        <a href="#">Transact</a>
+        <router-link to="/dashboard/transact">Transact</router-link>
+        <!-- <a href="#">Transact</a> -->
         <a href="#" class="border-b-2 pb-2 border-slate-700">Project</a>
         <a href="#">Profile</a>
         <a href="#">Theme</a>
@@ -33,7 +34,7 @@
           <button class="bg-green-300 p-2 rounded mx-auto">Report</button>
         </div>
       </aside>
-      <div class="w-full bg-slate-100">
+      <div class="w-full flex flex-col justify-center items-center bg-slate-100">
         <router-view/>
       </div>
     </div>

@@ -50,7 +50,7 @@
   export default {
     data() {
       return {
-        url: 'http://localhost:8000/login',
+        url: 'http://jijenge.muvandii.tech/app/login',
         username: '',
         password: '',
       };
@@ -67,6 +67,7 @@
         })
         .then(response =>{
           if (!response.ok){
+          console.log(response.statusCode)
           const errorData = response.json()
           console.log(errorData)
           // throw new Error('Network Response was not Ok');
@@ -75,8 +76,8 @@
         })
         .then(data => {
           this.$router.push('/dashboard')
-          localStorage.setItem('access_token', data['access_token'])    
-          console.log(data['access_token'])
+          localStorage.setItem('token', data['access_token'])    
+          console.log(data['token'])
         })
         .catch(error => {
           console.error(error)

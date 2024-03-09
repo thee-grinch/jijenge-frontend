@@ -21,6 +21,11 @@ const routes = [
         path: '/dashboard/',
         name: 'dhome',
         component: () => import('../views/DhomeView.vue')
+      },
+      {
+        path: '/dashboard/transact',
+        name: 'transact',
+        component: () => import('../views/DtransactView.vue') 
       }
     ]
   },
