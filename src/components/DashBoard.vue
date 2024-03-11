@@ -10,7 +10,7 @@
         <input type="text" placeholder="Search" class="rounded-lg px-1">
         <div class="flex px-2">
           <!-- <img src="" alt=""> -->
-          <p>John Doe</p>
+          <p>{{ name }}</p>
           <button class="px-2"><i class="fa-solid fa-caret-down"></i></button>
         </div>
         <button><i class="fa-solid fa-bell"></i></button>
@@ -42,33 +42,26 @@
   <!-- </div> -->
 </template>
 
-<!-- <script>
-import BalanceCard from './BalanceCard.vue';
-import MyChart from './MyChart.vue';
-import NotificationCard from './NotificationCard.vue';
-export default {
-  name: 'DashBoard',
-  components: { BalanceCard, MyChart, NotificationCard },
-  data() {
-    return {
-      notifications: [{
-        id: 1,
-        title: 'New Loan',
-        message: 'You have been approved for a loan of Ksh 10,000'
-      }, {
-        id: 2,
-        title: 'New Loan',
-        message: 'You have been approved for a loan of Ksh 140,000'
-      }, {
-        id: 3,
-        title: 'New Loan',
-        message: 'You have been approved for a loan of Ksh 120,000'
-      }, {
-        id: 4,
-        title: 'New Loan',
-        message: 'You have been approved for a loan of Ksh 1450,000'}]
-    };
+<script setup>
+import sendGet from '@/utils/sendGet.js';
+import { onBeforeMount, ref } from 'vue';
+const name = ref('bagwell')
+// Define an async function to fetch data
+const fetchData = async () => {
+  try {
+    const data = await sendGet('http://jijenge.muvandii.tech/app/username');
+    // Access the 'name' property from the data object
+    console.log(data);
+    name.value = data.name;
+    console.log(name);
+  } catch (error) {
+    console.error('Error:', error);
   }
-}
+};
+onBeforeMount(() => {
+  fetchData();
+});
+
+// Call the fetchData function to initiate the request
+// fetchData();
 </script>
-   -->

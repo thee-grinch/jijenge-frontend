@@ -23,7 +23,7 @@
           </div> -->
       </div><!-- end of the main div -->
       <div>
-        <div v-if="notifications.length > 0">
+        <div v-if="notifications">
                 <p class="text-2xl font-bold">Notifications</p>
                 <NotificationCard v-for="notification in notifications" :key="notification.id" :data="notification" />
           </div>
@@ -37,9 +37,13 @@
 import BalanceCard from './BalanceCard.vue';
 import MyChart from './MyChart.vue';
 import NotificationCard from './NotificationCard.vue';
+import sendGet from '@/utils/sendGet.js';
+
+// const sendGet = require('@/utils/sendGet.js')
 export default {
   name: 'DashBoard',
   components: { BalanceCard, MyChart, NotificationCard },
+  
   data() {
     return {
       notifications: [{
@@ -59,6 +63,16 @@ export default {
         title: 'New Loan',
         message: 'You have been approved for a loan of Ksh 1450,000'}]
     };
-  }
+  },
+  beforeMount() {
+
+    sendGet('http://jijenge.muvandii.tech/app/user')
+    .then((response) => {
+      this.notifications = response.data;
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+  },
 }
 </script>

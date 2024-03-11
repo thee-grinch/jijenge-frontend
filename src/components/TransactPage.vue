@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+// import axios from 'axios';
 export default {
     data() {
         return {
@@ -33,19 +33,20 @@ export default {
     },
     methods: {
         submit() {
-            token = localStorage.getItem('token');
-            if (!token) {
-                this.$router.push('/login');
-            }
-            else {
-                const headers = {Authentication: token}
-            }
-            axios.post('http://jijenge.muvandii.tech/app/transaction', {
-                transaction_type: this.selectedOption,
-                amount: this.Amount
-            }, {headers: headers})
+            // token = localStorage.getItem('token');
+            // if (!token) {
+            //     this.$router.push('/login');
+            // }
+            // else{
+            // const headers = {Authentication: token}
+        
+            // axios.post('http://jijenge.muvandii.tech/app/transaction', {
+            //     transaction_type: this.selectedOption,
+            //     amount: this.Amount
+            // }, {headers: headers})
             
             console.log(this.selectedOption, this.Amount);
+        // }
         }
     }
 };
