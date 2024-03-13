@@ -2,12 +2,44 @@
     <div class="flex">
       <div class="h-full">
         <div class="grid grid-cols-4 gap-2">
-          <BalanceCard v-for="card in [1, 2, 3, 4]" :key="card" class="bg-white shadow-md"/>         
+          <!-- <BalanceCard v-for="card in [1, 2, 3, 4]" :key="card" class="bg-white shadow-md"/>  -->
+          <div class="max-w-xs rounded overflow-hidden shadow-lg  bg-white">
+            <div class="px-6 py-4 space-y-1">
+              <i class="fa fa-money-bill-alt text-gray-600 mr-2"></i>
+              <span class="font-bold text-xl text-gray-800">Savings</span>
+              <p class="text-gray-700 text-base">Amount Saved: Sh {{ user.savings }}</p>
+            </div>
+          </div>
+          <div class="max-w-xs rounded overflow-hidden shadow-lg bg-white">
+            <div class="px-6 py-4 space-y-1">
+              <i class="fa fa-money-check-alt text-gray-600 mr-2"></i>
+              <span class="font-bold text-xl text-gray-800">Loans</span>
+              <p class="text-gray-700 text-base">LOan Amount: sh {{ user['loans']}} </p>
+            </div>
+          </div>
+          <div class="max-w-xs rounded overflow-hidden shadow-lg bg-white">
+            <div class="px-6 py-4 space-y-1">
+              <i class="fa fa-users text-gray-600 mr-2"></i>
+              <span class="font-bold text-xl text-gray-800">Projects</span>
+              <p class="text-gray-700 text-base">Project Contribution: Sh {{ user.contributions }}</p>
+            </div>
+          </div>
+          <div class="max-w-xs rounded overflow-hidden shadow-lg bg-white">
+            <div class="px-6 py-4 space-y-1">
+              <i class="fa fa-share-alt text-gray-600 mr-2"></i>
+              <span class="font-bold text-xl text-gray-800">Shares</span>
+              <p class="text-gray-700 text-base">Share Contribution: $19.99</p>
+            </div>
+          </div>   
         </div>
-        <main class="grid grid-cols-2 h-64 bg-white shadow-md">
+        <main class="grid grid-cols-2 bg-white shadow-md">
             <div class="graph">
             <!-- <p class="h-32 border border-solid"> this is the graph holder</p> -->
             <MyChart />
+          </div>
+          <div class="donut">
+            <!-- <BarChart /> -->
+            <DoughnutChart :series="[1, 2, 3,4]" :names="['Loans', 'Projects', 'Constributions', 'shares']"  />
           </div>
           </main>
           <div class="grid grid-cols-2 mt-4">
@@ -33,46 +65,55 @@
         </div>
       </div>
 </template>
-<script>
-import BalanceCard from './BalanceCard.vue';
+<script setup>
+// Import necessary components and utilities
 import MyChart from './MyChart.vue';
+// import BarChart from './BarChart.vue'
+import DoughnutChart from './DoughnutChart.vue';
 import NotificationCard from './NotificationCard.vue';
 import sendGet from '@/utils/sendGet.js';
+import { ref, reactive, onBeforeMount } from 'vue';
 
-// const sendGet = require('@/utils/sendGet.js')
-export default {
-  name: 'DashBoard',
-  components: { BalanceCard, MyChart, NotificationCard },
-  
-  data() {
-    return {
-      notifications: [{
-        id: 1,
-        title: 'New Loan',
-        message: 'You have been approved for a loan of Ksh 10,000'
-      }, {
-        id: 2,
-        title: 'New Loan',
-        message: 'You have been approved for a loan of Ksh 140,000'
-      }, {
-        id: 3,
-        title: 'New Loan',
-        message: 'You have been approved for a loan of Ksh 120,000'
-      }, {
-        id: 4,
-        title: 'New Loan',
-        message: 'You have been approved for a loan of Ksh 1450,000'}]
-    };
-  },
-  beforeMount() {
+// Define reactive properties
+const name = ref("");
+const group = reactive({
+  loans: 0,
+  savings: 0,
+  contributions: 0
+});
+const user = reactive({
+  loans: 0,
+  savings: 0,
+  contributions: 0
+});
+const notifications = ref([]);
 
-    sendGet('http://jijenge.muvandii.tech/app/user')
-    .then((response) => {
-      this.notifications = response.data;
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-  },
-}
+// Define a function to fetch data
+const fetchData = async () => {
+  try {
+    const response = await sendGet('http://jijenge.muvandii.tech/app/user');
+
+    // Assign properties directly to reactive objects
+    name.value = response.name;
+    Object.assign(group, response.group);
+    Object.assign(user, response.user);
+    notifications.value = response.notifications;
+
+    console.log(user.loans);
+    console.log(group);
+  } catch (error) {
+    console.error('Error:', error);
+  }
+};
+
+// Trigger data fetching before component mounting
+onBeforeMount(() => {
+  fetchData();
+});
+// const label = "User"
+// const data = ref([10, 20, 30])
+// Debugging console logs
+console.log(name);
+console.log(group);
+console.log(user);
 </script>

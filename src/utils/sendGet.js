@@ -1,6 +1,11 @@
+import { useRouter } from 'vue-router';
 import axios from 'axios';
 
 const sendGet = async (url) => {
+    // Create a router instance
+    const router = useRouter();
+    console.log(router)
+
     // Check if token is present in local storage
     const token = localStorage.getItem('token');
 
@@ -13,17 +18,18 @@ const sendGet = async (url) => {
 
         // If the response status is unauthorized, redirect to the login page
         if (response.status === 401) {
-            this.$router.push('/login');
+            router.push('/login');
+            return; // Make sure to return after redirection
         }
-        console.log(response.data)
+
+        console.log("resposnse", response.data);
         // Return the data from the response
         return response.data;
     } catch (error) {
         // Handle any errors that occur during the request
-        alert('Error Occurred');
         console.error('Error:', error);
         // Redirect to the login page in case of any error
-        this.$router.push('/login');
+        router.push('/login');
     }
 };
 

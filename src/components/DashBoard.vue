@@ -1,5 +1,5 @@
 <template>
-  <div class="h-screen lg:w-3/4 lg:mx-auto">
+  <div class="h-screen lg:max-w-4/5 lg:mx-auto">
     <nav class="w-full  flex justify-between py-4 bg-green-400 text-green-900 px-2 rounded-md">
       <div class="flex space-x-2">
         <h2 class="font-bold text-white text-xl">JiJenge Youth Group</h2>
@@ -10,7 +10,7 @@
         <input type="text" placeholder="Search" class="rounded-lg px-1">
         <div class="flex px-2">
           <!-- <img src="" alt=""> -->
-          <p>{{ name }}</p>
+          <p class="capital">{{ name }}</p>
           <button class="px-2"><i class="fa-solid fa-caret-down"></i></button>
         </div>
         <button><i class="fa-solid fa-bell"></i></button>
@@ -65,3 +65,8 @@ onBeforeMount(() => {
 // Call the fetchData function to initiate the request
 // fetchData();
 </script>
+<style scoped>
+.capital{
+  text-transform: capitalize;
+}
+</style>

@@ -1,5 +1,5 @@
 <template>
-<section class="py-4 px-8 md:flex justify-between ">
+<section class="py-4 md:flex justify-between my-16 w-5/6 mx-auto">
     <!-- Text and Buttons on the Left -->
     <div class="md:w-1/2">
       <h1 class="text-5xl text-white font-bold mb-2">Empowering Financial Growth, One Member at a Time</h1>
