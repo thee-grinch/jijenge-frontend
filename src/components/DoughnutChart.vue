@@ -12,9 +12,9 @@ export default {
       required: true
     }
   },
-  data() {
-    return {
-      chartOptions: {
+  computed: {
+    chartOptions() {
+      return {
         chart: {
           type: 'donut',
         },
@@ -27,8 +27,8 @@ export default {
   },
   methods: {
     renderChart(series) {
-      this.chartOptions.series = series;
-      const chart = new ApexCharts(document.querySelector('#chart'), this.chartOptions)
+      const chartOptions = {...this.chartOptions, series};
+      const chart = new ApexCharts(document.querySelector('#chart'), chartOptions)
       chart.render()
     },
   }

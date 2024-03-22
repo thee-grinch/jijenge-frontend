@@ -1,7 +1,7 @@
-<template>
+<template ref="landing">
         <FirstPage />
-        <FeatureSection />
-        <TestmonialSection />
+        <FeatureSection ref="feature"/>
+        <TestmonialSection ref="testmonials"/>
         <WorksSection />
         <FooterSection />
 </template>

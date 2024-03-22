@@ -1,5 +1,6 @@
 <template>
-      
+  <div>
+    
     <div class="min-h-screen flex flex-col justify-center items-center">
       <div>
         <h1 class="text-2xl font-bold text-center text-green-700">Sign In To Jijenge Youth</h1>
@@ -25,10 +26,12 @@
           <input
             v-model="password"
             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            :class="{ 'border-red-500': error }"
             id="password"
             type="password"
             placeholder="********"
           />
+          <p v-if="error" class="text-red-500 animate-pulse ">check username or password</p>
         </div>
         <div class="flex items-center justify-between">
           <button
@@ -44,9 +47,55 @@
         </div>
       </form>
     </div>
+  </div>
   </template>
   
-  <script>
+  <script setup>
+  import { ref } from 'vue';
+  import { useRouter } from 'vue-router';
+  
+  const url = 'https://jijenge.muvandii.tech/app/login';
+  const username = ref('');
+  const password = ref('');
+  const error = ref(false);
+  const router = useRouter();
+  
+  async function login() {
+    const formData = new FormData();
+    // console.log(this.$router.push)
+    formData.append('username', username.value);
+    formData.append('password', password.value);
+  
+    try {
+      const response = await fetch(url, {
+        method: 'post',
+        body: formData
+      });
+  
+      if (!response.ok) {
+        console.log(response.statusCode);
+        const errorData = await response.json();
+        error.value = true;
+        console.log(errorData);
+        // throw new Error('Network Response was not Ok');
+      }
+  
+      const data = await response.json();
+      router.push('/dashboard');
+      localStorage.setItem('token', data['access_token']);
+      console.log(data['token']);
+    } catch (error) {
+      console.error(error);
+    }
+  
+    console.log('Logging in with:', username.value, password.value);
+  }
+  </script>
+  
+  <style>
+  /* You can add additional styles here if needed */
+  </style>
+<!--   
   export default {
     data() {
       return {
@@ -91,4 +140,4 @@
   <style>
   /* You can add additional styles here if needed */
   </style>
-  
+   -->

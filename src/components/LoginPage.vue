@@ -17,7 +17,7 @@
 
       <!-- Right Form Section (either Login or Signup) -->
       <div class="m-auto">
-        <LogIn v-if="showLogin" />
+        <LogIn v-if="showLogin" ref="show"/>
         <SignUp v-else />
       </div>
     </div>

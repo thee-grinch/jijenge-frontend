@@ -1,4 +1,10 @@
 <template>
+  <div class="relative">
+    <div v-if="success" class="absolute left-0 top-2 bg-white shadow-2xl border border-green-500 py-6 animate-bounce rounded-md  px-4">
+      <p class="font-bold">User Registered successfully</p>
+      <p>Please verify your email</p>
+      <p class="text-center mt-2"><router-link class="bg-green-500 px-2 py-1 rounded-xl" to="/login">here</router-link></p>
+    </div>
     <div class="min-h-screen flex flex-col items-center justify-center">
       <h1 class="text-2xl font-bold text-center text-green-700"> Create An Account</h1>
       <p class="text-slate-400"> Open an account and start advancing with Us</p>
@@ -74,13 +80,55 @@
         </div>
       </form>
     </div>
+    </div>
   </template>
   
-  <script>
-  export default {
+
+<script setup>
+import { ref } from 'vue';
+
+const url = 'https://jijenge.muvandii.tech/app/new';
+const username = ref('');
+const first_name = ref('');
+const last_name = ref('');
+const email = ref('');
+const password = ref('');
+
+const success = ref(false);
+async function signup() {
+  try {
+    // const now = DATE()
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        name: username.value,
+        password: password.value,
+        first_name: first_name.value,
+        last_name: last_name.value,
+        email: email.value,
+      }),
+    });
+    if (!response.ok) {
+      const errorData = await response.json();
+      console.log(errorData);
+      throw new Error('Network Response was not Ok');
+    }
+    else {
+      success.value = true;
+    }
+    // Handle the response
+  } catch (error) {
+    // Handle the error
+  }
+}
+</script>
+  <!-- export default {
     data() {
       return {
-        url: 'http://jijenge.muvandii.tech/app/new',
+        url: 'https://jijenge.muvandii.tech/app/new',
         username: '',
         first_name: '',
         last_name: '',
@@ -126,4 +174,4 @@
   <style>
   /* You can add additional styles here if needed */
   </style>
-  
+   -->

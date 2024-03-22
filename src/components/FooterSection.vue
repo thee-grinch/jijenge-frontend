@@ -7,7 +7,7 @@
         </div>
         <div class="flex w-11/12 mx-auto mt-8">
             <p class="text-white text-2xl font-extrabold">JiJenge Youth Group</p>
-            <section class="w-4/5 flex justify-evenly mx-auto text-white">
+            <section class="footer-s w-4/5 md:flex justify-evenly mx-auto text-white">
                 <div>
                     <h2 class="font-bold">Services</h2>
                     <p>Privacy Policy</p>
@@ -35,3 +35,10 @@
         </div>
     </footer>
 </template>
+<style>
+    @media (max-width: 640px) {
+        .footer-s {
+        display: block;
+    }
+}
+</style>

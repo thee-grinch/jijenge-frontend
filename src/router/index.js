@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import LandingPage from '../views/LandingPage.vue'
+import LandingPage from '../components/LandingPage.vue'
 
 const routes = [
   {
@@ -18,9 +18,18 @@ const routes = [
         component: () => import('../views/DloanView.vue')
       },
       {
+        path: '/dashboard/admin',
+        name: 'loans',
+        component: () => import('../views/DadminView.vue')
+      },
+      {
         path: '/dashboard/',
         name: 'dhome',
         component: () => import('../views/DhomeView.vue')
+      },{
+        path: '/dashboard/loantypes',
+        name: 'loantypes',
+        component: () => import('../views/LoansView.vue')
       },
       {
         path: '/dashboard/transact',
