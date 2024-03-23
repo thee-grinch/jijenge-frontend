@@ -18,7 +18,7 @@ const statusCode = ref(false);
 onMounted(async () => {
   const token = route.query.token;
   try {
-    const response = await axios.get(`https://jijenge.muvandii.tech/${token}`);
+    const response = await axios.get(`https://jijenge.muvandii.tech/verify/${token}`);
     statusCode.value = response.statusCode === 200;
   } catch (error) {
     console.error(error);
