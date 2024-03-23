@@ -1,4 +1,8 @@
 <template>
+    <div v-if="sent" class="animate-shake absolute top-2 right-2 border-2 border-green-300 py-8 px-4 rounded">
+        <h1 class="text-green-700 font-bold">Success</h1>
+        <p>{{ c.data['message'] }}</p>
+    </div>
     <div class="flex flex-col bg-green-100 py-8 px-4 rounded">
         <h1 class="text-green-950 font-bold text-3xl">Welcome to the Admin Dashboard</h1>
         <div class="flex flex-col">
@@ -35,7 +39,7 @@
             </select>
         </div>
         <p v-if="error" class="text-red-300 animate-pulse italic ">please input all the fields</p>
-        <button class="px-4 py-2 bg-green-500 w-fit mt-2 mx-auto rounded-xl" @click="submitTransaction">Submit</button>
+        <button class="px-4 py-2 bg-green-500 w-fit mt-2 mx-auto rounded-xl" type="submit" @click="submitTransaction">Submit</button>
 
     </div>
 </template>
@@ -55,10 +59,13 @@ const loanPeriod = ref(1);
 const multiplier = ref(0);
 const guarantors = ref(0);
 const error = ref(false)
-const data = {};
+let data = {};
+let c;
+const sent = ref(false);
 
-let url = 'https://jijenge.muvandii.tech/app';
+// let url = 'https://jijenge.muvandii.tech/app';
 const submitTransaction = async () => {
+    let url = 'https://jijenge.muvandii.tech/app';
     url = url + '/' + selectedOption.value;
     if (selectedOption.value === 'add_loan_type') {
     data['loan_type'] = typeName.value;
@@ -78,16 +85,31 @@ for (let key in data){
     if (key == 'guarantors'){
         continue;
     }
-    else if (!(data[key])){
+    if (!(data[key])){
         error.value = true; 
         return;
     }
-   let c =  sendPost(url, data);
-   console.log(c)
 
 }
-submitTransaction();
-    
+ c =  await sendPost(url, data);
+if (c.success){
+    sent.value = true;
+    setTimeout(() => {
+        sent.value = false;
+    }, 5000);
+    error.value = false;
+    amount.value = 0;
+    userId.value = 0;
+    loanType.value = 0;
+    typeName.value = '';
+    interestRate.value = 0;
+    loanPeriod.value = 1;
+    multiplier.value = 0;
+    guarantors.value = 0;
+    data = {};
+    selectedOption.value = '';
+}
+console.log(c);
 }
 const fetchData = async () => {
     const response = await sendGet('https://jijenge.muvandii.tech/app/get_loan_types')
@@ -98,3 +120,22 @@ onBeforeMount(() => {
 })  
 
 </script>
+<style>
+  @keyframes shake {
+    0% {
+      transform: translateX(0);
+    }
+    25% {
+      transform: translateX(-5px);
+    }
+    50% {
+      transform: translateX(5px);
+    }
+    75% {
+      transform: translateX(-5px);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+</style>
