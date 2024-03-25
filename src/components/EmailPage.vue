@@ -11,7 +11,7 @@
         <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 0012 20c4.411 0 8-3.589 8-8h-2c0 3.309-2.691 6-6 6s-6-2.691-6-6H6c0 3.309-2.691 6-6 6z"></path>
       </svg>
     </div>
-    <div v-if="error" class="bg-red-100 shadow-2xl p-8 mx-auto max-w-72">
+    <div v-if="error" class="bg-red-100 shadow-2xl p-8 mx-auto  max-w-72">
         <img src="@/assets/error.png" alt="error" />
         <h1 class="text-center text-red-950 font-bold text-2xl">Error</h1>
         <p class='py-4'>An error occurred while verifying your email. Please try again later</p>
@@ -31,8 +31,8 @@ const loading = ref(true);
 onMounted(async () => {
   const token = route.query.token;
   try {
-    const response = await axios.get(`https://jijenge.muvandii.tech/verify/${token}`);
-    if (response.statusCode === 200) {
+    const response = await axios.get(`https://jijenge.muvandii.tech/app/verify/${token}`);
+    if (response.statusCode == 200) {
       loading.value = false;
       statusCode.value = true;
     }
