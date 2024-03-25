@@ -8,7 +8,7 @@ const routes = [
     component: LandingPage
   },
   {
-    path: '/email_verification/',
+    path: '/verify/',
     name: 'email_verification',
     component: () => import('../views/EmailView.vue')
   },
